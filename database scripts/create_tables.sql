@@ -1,5 +1,6 @@
 use student_registry;
 
+drop table if exists `courses`;
 drop table if exists `mentor`;
 drop table if exists `mentor_details`;
 
@@ -23,6 +24,17 @@ primary key(id),
 key fk_idx (mentor_detail_id),
 constraint mentor_detail_mapping foreign key (mentor_detail_id) references mentor_details (id) on delete no action on update no action 
 );
+
+create table courses (
+id int(11) not null auto_increment,
+title varchar(45) not null,
+course_desc varchar(128) default null,
+mentor_id int(11) default null,
+primary key(id),
+key fk_course_mentor_idx (mentor_id),
+constraint course_mentor_mapping foreign key (mentor_id) references mentor (id) on delete no action on update no action
+);
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 
