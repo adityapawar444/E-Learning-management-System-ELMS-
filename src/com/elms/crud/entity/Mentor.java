@@ -1,5 +1,7 @@
 package com.elms.crud.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +34,9 @@ public class Mentor {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="mentor_detail_id")
 	private MentorDetails mentorDetails;
+	
+	@OneToMany(mappedBy = "mentor",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	private List<Course> courses;
 	
 
 	public Mentor() {
@@ -82,6 +88,14 @@ public class Mentor {
 
 	public void setMentorDetails(MentorDetails mentorDetails) {
 		this.mentorDetails = mentorDetails;
+	}
+
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
 	}
 
 	@Override

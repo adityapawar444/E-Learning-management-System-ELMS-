@@ -1,34 +1,40 @@
 package com.elms.crud.startup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.elms.crud.controller.CourseController;
 import com.elms.crud.controller.MentorController;
 import com.elms.crud.db.AppSessionManager;
+import com.elms.crud.db.CourseDBInterface;
 import com.elms.crud.db.MentorDBInterface;
+import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Mentor;
-import com.elms.crud.entity.MentorDetails;
 
-public class MentorEntityTest {
-
+public class CourseEntityTest {
+	
 	public static void main(String[] args) {
-
+	
 		AppSessionManager appSession = new AppSessionManager("hibernate.cfg.xml");
 
+		CourseDBInterface thecourseController = new CourseController(appSession);
 		MentorDBInterface mentorController = new MentorController(appSession);
-
-//		MentorDetails mDetails = new MentorDetails("Elimination Technique, Answer Writing, Essay Writing, Note Making", "2019,2020,2021",
-//				"2019,2020", "", (float)4.1);
+		
+		Course testCourse = new Course("Answer Writing", "Dedicated programme focussed on content development & skill enhancement.");
+		
+		
 
 		try {
-			mentorController.getMentorById(3);
-//		Mentor mentor = new Mentor("TyWin","Lannister",true);
-//		mentor.setMentorDetails(mDetails);
-//		
-//		mentorController.createNewMentor(mentor);
+		thecourseController.createCourse(testCourse);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			appSession.closeAppSessionFactory();
 		}
-
 	}
+	
+	
+		
+	
 
 }

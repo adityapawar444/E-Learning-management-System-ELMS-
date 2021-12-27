@@ -31,6 +31,7 @@ public class MentorController implements MentorDBInterface {
 		System.out.println("fetching the Mentor with id: " + id + "...... ");
 		Session currSession = appSession.getNewAppSession();
 		Mentor mentor = currSession.get(Mentor.class, id);
+		//System.out.println(mentor.getCourses());
 		appSession.commitSession(currSession);
 		System.out.println("Read operation successful!");
 		return mentor;
@@ -63,7 +64,7 @@ public class MentorController implements MentorDBInterface {
 
 	@Override
 	public void deleteMentorById(int id) {
-		System.out.println("Deleting student id= " + id + "...... ");
+		System.out.println("Deleting Mentor with id= " + id + "...... ");
 		Session currSession = appSession.getNewAppSession();
 		Mentor dbCopy = currSession.get(Mentor.class, id);
 		currSession.delete(dbCopy);

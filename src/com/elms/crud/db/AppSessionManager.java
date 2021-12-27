@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Mentor;
 import com.elms.crud.entity.MentorDetails;
 import com.elms.crud.entity.Student;
@@ -16,7 +17,9 @@ public class AppSessionManager {
 	public AppSessionManager(String configFile) {
 		sessionFactory = new Configuration().configure(configFile)
 				.addAnnotatedClass(Student.class)
-				.addAnnotatedClass(Mentor.class).addAnnotatedClass(MentorDetails.class)
+				.addAnnotatedClass(Mentor.class)
+				.addAnnotatedClass(MentorDetails.class)
+				.addAnnotatedClass(Course.class)
 				.buildSessionFactory();
 	}
 
@@ -28,6 +31,7 @@ public class AppSessionManager {
 
 	public void commitSession(Session appSession) {
 		appSession.getTransaction().commit();
+		appSession.close();
 	}
 
 	public void closeAppSessionFactory() {
