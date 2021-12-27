@@ -10,6 +10,7 @@ import com.elms.crud.db.CourseDBInterface;
 import com.elms.crud.db.MentorDBInterface;
 import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Mentor;
+import com.elms.crud.utility.MentorEntityUtlity;
 
 public class CourseController implements CourseDBInterface {
 
@@ -19,7 +20,6 @@ public class CourseController implements CourseDBInterface {
 
 	public CourseController(AppSessionManager currSession) {
 		this.appSession = currSession;
-		
 	}
 
 	@Override
@@ -29,9 +29,10 @@ public class CourseController implements CourseDBInterface {
 
 
 		Mentor courseMentor = currSession.get(Mentor.class, 3);
-		
-		List<Course> courseList = new ArrayList<Course>();
-		courseList.add(newCourse);
+		MentorEntityUtlity mentorUtility = new MentorEntityUtlity(courseMentor,appSession);
+		mentorUtility.addCourseToList(newCourse);
+//		List<Course> courseList = new ArrayList<Course>();
+//		courseList.add(newCourse);
 
 		newCourse.setCourseMentor(courseMentor);
 

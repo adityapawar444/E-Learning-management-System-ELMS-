@@ -1,17 +1,19 @@
 package com.elms.crud.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 
 import com.elms.crud.db.AppSessionManager;
 import com.elms.crud.db.MentorDBInterface;
+import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Mentor;
 
 public class MentorController implements MentorDBInterface {
-	
+
 	AppSessionManager appSession;
-	
+
 	public MentorController(AppSessionManager currSession) {
 		this.appSession = currSession;
 	}
@@ -31,7 +33,6 @@ public class MentorController implements MentorDBInterface {
 		System.out.println("fetching the Mentor with id: " + id + "...... ");
 		Session currSession = appSession.getNewAppSession();
 		Mentor mentor = currSession.get(Mentor.class, id);
-		//System.out.println(mentor.getCourses());
 		appSession.commitSession(currSession);
 		System.out.println("Read operation successful!");
 		return mentor;
@@ -41,7 +42,8 @@ public class MentorController implements MentorDBInterface {
 	public List<Mentor> getMentorByParam(String param, String value) {
 		System.out.println("fetching the Mentor where " + param + "=" + value + "......");
 		Session currSession = appSession.getNewAppSession();
-		List<Mentor> mentorList = currSession.createQuery("from Mentor m where s." + param + "=" + value).getResultList();
+		List<Mentor> mentorList = currSession.createQuery("from Mentor m where s." + param + "=" + value)
+				.getResultList();
 		System.out.println("Read operation successful!");
 		return mentorList;
 	}
@@ -51,15 +53,15 @@ public class MentorController implements MentorDBInterface {
 		System.out.println("updating the Mentor with id: " + updatedMentor.getId());
 		Session currSession = appSession.getNewAppSession();
 		Mentor dbCopy = currSession.get(Mentor.class, updatedMentor.getId());
-		
+
 		dbCopy.setFirstName(updatedMentor.getFirstName());
 		dbCopy.setLastName(updatedMentor.getLastName());
 		dbCopy.setAvailable(updatedMentor.isAvailable());
 		dbCopy.setMentorDetails(updatedMentor.getMentorDetails());
-		
+
 		appSession.commitSession(currSession);
 		System.out.println("Update operation successful!");
-		
+
 	}
 
 	@Override
@@ -70,7 +72,24 @@ public class MentorController implements MentorDBInterface {
 		currSession.delete(dbCopy);
 		appSession.commitSession(currSession);
 		System.out.println("Delete operation successful!");
+
+	}
+
+	@Override
+	public List<Course> getCourseListForMentor(int id) {
+		System.out.println("fetching Coursees for Mentor with id: " + id + "...... ");
+
+		Session currSession = appSession.getNewAppSession();
+		Mentor mentor = currSession.get(Mentor.class, id);
 		
+		List<Course> resList = new ArrayList<>();
+		resList.addAll(mentor.getCourses());
+		
+		appSession.commitSession(currSession);
+		
+		System.out.println("Read operation successful!");
+
+		return resList;
 	}
 
 }

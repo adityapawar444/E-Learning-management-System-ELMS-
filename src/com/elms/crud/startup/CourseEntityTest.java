@@ -18,14 +18,15 @@ public class CourseEntityTest {
 		AppSessionManager appSession = new AppSessionManager("hibernate.cfg.xml");
 
 		CourseDBInterface thecourseController = new CourseController(appSession);
-		MentorDBInterface mentorController = new MentorController(appSession);
+		//MentorDBInterface mentorController = new MentorController(appSession);
 		
-		Course testCourse = new Course("Answer Writing", "Dedicated programme focussed on content development & skill enhancement.");
+		Course testCourse = new Course("CSAT", "Focused programme with special emphsis on English comprehension.");
 		
 		
 
 		try {
-		thecourseController.createCourse(testCourse);
+		thecourseController.createCourse(testCourse);	
+		//thecourseController.getCourseById(1);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {

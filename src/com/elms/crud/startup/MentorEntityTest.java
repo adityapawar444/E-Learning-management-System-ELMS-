@@ -5,6 +5,7 @@ import com.elms.crud.db.AppSessionManager;
 import com.elms.crud.db.MentorDBInterface;
 import com.elms.crud.entity.Mentor;
 import com.elms.crud.entity.MentorDetails;
+import com.elms.crud.utility.MentorEntityUtlity;
 
 public class MentorEntityTest {
 
@@ -18,14 +19,20 @@ public class MentorEntityTest {
 //				"2019,2020", "", (float)4.1);
 
 		try {
-			mentorController.getMentorById(3);
+			Mentor mentor = mentorController.getMentorById(3);
 //		Mentor mentor = new Mentor("TyWin","Lannister",true);
 //		mentor.setMentorDetails(mDetails);
 //		
-//		mentorController.createNewMentor(mentor);
-		}catch (Exception e) {
+//		mentorController.createNewMentor(mentor);+
+			System.out.println(".........");
+			System.out.println(mentor.getFirstName());
+			System.out.println(mentor.getLastName());
+			System.out.println(mentor.getMentorDetails().getSkills());
+			System.out.println(new MentorEntityUtlity(mentor, appSession).getCourseList(mentor.getId()));
+			System.out.println(".........");
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			appSession.closeAppSessionFactory();
 		}
 
