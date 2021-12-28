@@ -27,9 +27,9 @@ public class ReviewController implements ReviewsDBInterface {
 
 		Course currCourse = currSession.get(Course.class, CourseID);
 		
-		CourseEntityUtility courseUtility = new CourseEntityUtility(currCourse);
+		CourseEntityUtility courseUtility = new CourseEntityUtility();
 		
-		courseUtility.addReviewToList(newReview);
+		courseUtility.addReviewToList(currCourse,newReview);
 
 
 		currSession.save(newReview);

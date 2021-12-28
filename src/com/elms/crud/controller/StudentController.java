@@ -1,11 +1,13 @@
 package com.elms.crud.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 
 import com.elms.crud.db.AppSessionManager;
 import com.elms.crud.db.StudentDBInterface;
+import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Student;
 
 public class StudentController implements StudentDBInterface {
@@ -90,6 +92,23 @@ public class StudentController implements StudentDBInterface {
 		appSession.commitSession(curSession);
 		System.out.println("Delete operation successful!");
 
+	}
+
+	@Override
+	public List<Course> getCoursesForStudent(int id) {
+		System.out.println("-----------------------------------------------------------");
+		System.out.println("fetching courses for student :" + id);
+		
+		Session currSession = appSession.getNewAppSession();
+		
+		Student dbStudent = currSession.get(Student.class, id);
+		
+		List<Course> templList = new ArrayList<Course>();
+		templList.addAll(dbStudent.getCourses());
+		
+		System.out.println("Read opeartion successful");
+		System.out.println("-----------------------------------------------------------");
+		return templList;
 	}
 
 }
