@@ -1,13 +1,11 @@
 package com.elms.crud.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 
 import com.elms.crud.db.AppSessionManager;
 import com.elms.crud.db.CourseDBInterface;
-import com.elms.crud.db.MentorDBInterface;
 import com.elms.crud.entity.Course;
 import com.elms.crud.entity.Mentor;
 import com.elms.crud.utility.MentorEntityUtlity;

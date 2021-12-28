@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.elms.crud.entity.Course;
+import com.elms.crud.entity.Review;
 import com.elms.crud.entity.Mentor;
 import com.elms.crud.entity.MentorDetails;
 import com.elms.crud.entity.Student;
@@ -20,6 +21,7 @@ public class AppSessionManager {
 				.addAnnotatedClass(Mentor.class)
 				.addAnnotatedClass(MentorDetails.class)
 				.addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class)
 				.buildSessionFactory();
 	}
 

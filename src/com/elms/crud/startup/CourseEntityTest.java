@@ -20,13 +20,14 @@ public class CourseEntityTest {
 		CourseDBInterface thecourseController = new CourseController(appSession);
 		//MentorDBInterface mentorController = new MentorController(appSession);
 		
-		Course testCourse = new Course("CSAT", "Focused programme with special emphsis on English comprehension.");
+		Course testCourse = new Course("Intervew Guidance", "Specially designed for Engineers.");
 		
 		
 
 		try {
 		thecourseController.createCourse(testCourse);	
 		//thecourseController.getCourseById(1);
+		//thecourseController.deleteCourseById(2);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
